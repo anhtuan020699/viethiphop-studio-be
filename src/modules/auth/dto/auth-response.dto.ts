@@ -13,7 +13,7 @@ export class UserResponseDto {
   @ApiProperty({ example: null, nullable: true })
   avatar: string | null;
 
-  @ApiProperty({ example: 'USER', enum: ['USER', 'ADMIN', 'SUPER_ADMIN'] })
+  @ApiProperty({ example: 'USER', enum: ['USER', 'ADMIN'] })
   role: string;
 
   @ApiProperty({ example: true })
