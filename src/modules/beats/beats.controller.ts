@@ -1,11 +1,13 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nestjs/common';
 import { BeatsService } from './beats.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
+import { Public } from '../../common/decorators/public.decorator';
 
 @Controller('beats')
 export class BeatsController {
   constructor(private readonly beatsService: BeatsService) { }
 
+  @Public()
   @Get()
   findAll() {
     return this.beatsService.findAll(true); // Return active beats for public
@@ -17,6 +19,7 @@ export class BeatsController {
     return this.beatsService.findAll(false);
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.beatsService.findOne(id);

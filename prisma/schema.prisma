@@ -113,7 +113,7 @@ model Beat {
   originalPrice   Int?
   discountedPrice Int?
   status          String   @default("available") // available | sold
-  youtubeId       String
+  youtubeUrl      String
   isActive        Boolean  @default(true)
 
   createdAt DateTime @default(now())

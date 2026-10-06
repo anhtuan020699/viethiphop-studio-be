@@ -98,6 +98,19 @@ async function main() {
     ]
   });
   console.log('✅ FAQs seeded!');
+
+  // Seed Beats
+  await prisma.beat.deleteMany({});
+  await prisma.beat.createMany({
+    data: [
+      { title: 'Gunna x Lil Tjay Type Beat "Lost"', originalPrice: 1500000, discountedPrice: null, status: 'available', youtubeUrl: 'https://www.youtube.com/embed/EcFJ8hVQx9Y' },
+      { title: 'Vũ. Type Beat "Ánh Dương" | Prod by Công Phúc', originalPrice: 2000000, discountedPrice: 1500000, status: 'available', youtubeUrl: 'https://www.youtube.com/embed/qW-KwS4Hvp8' },
+      { title: '(SOLD) VSTRA Type Beat "Letters" | Beat by Công Phúc', originalPrice: 1500000, discountedPrice: null, status: 'sold', youtubeUrl: 'https://www.youtube.com/embed/Fg2sVl-1VIk' },
+      { title: '(SOLD) Juice WRLD Type Beat "Forever" | Beat by Gavies', originalPrice: 2000000, discountedPrice: null, status: 'sold', youtubeUrl: 'https://www.youtube.com/embed/8EZToxzvfGQ' },
+      { title: '(SOLD) Low G x Bruno Mars Type Beat "Summer Night" | Prod by Công Phúc', originalPrice: 2500000, discountedPrice: null, status: 'sold', youtubeUrl: 'https://www.youtube.com/embed/7jr8-0LRwZY' },
+    ]
+  });
+  console.log('✅ Beats seeded!');
 }
 
 main()
