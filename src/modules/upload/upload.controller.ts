@@ -8,7 +8,7 @@ import 'multer';
 @ApiBearerAuth()
 @Controller('upload')
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  constructor(private readonly uploadService: UploadService) { }
 
   @Post('image')
   @ApiOperation({ summary: 'Upload an image' })

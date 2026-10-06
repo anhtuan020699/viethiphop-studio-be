@@ -106,3 +106,18 @@ model Consultation {
 
   @@map("consultations")
 }
+
+model Beat {
+  id              String   @id @default(cuid())
+  title           String
+  originalPrice   Int?
+  discountedPrice Int?
+  status          String   @default("available") // available | sold
+  youtubeId       String
+  isActive        Boolean  @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("beats")
+}
