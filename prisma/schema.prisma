@@ -30,3 +30,79 @@ model User {
 
   @@map("users")
 }
+
+model Service {
+  id          String  @id @default(cuid())
+  slug        String  @unique // e.g., 'thu-am'
+  number      String? // e.g., '01'
+  title       String
+  english     String?
+  description String
+  suitableFor String?
+  source      String?
+  isMain      Boolean @default(true)
+  order       Int     @default(0)
+  isActive    Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("services")
+}
+
+model Media {
+  id             String  @id @default(cuid())
+  src            String
+  alt            String?
+  title          String?
+  category       String // "Không gian" | "Âm nhạc"
+  description    String?
+  source         String?
+  objectPosition String?
+  order          Int     @default(0)
+  isActive       Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("media")
+}
+
+model Faq {
+  id       String  @id @default(cuid())
+  question String
+  answer   String
+  order    Int     @default(0)
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("faqs")
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String
+  
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+model Consultation {
+  id          String  @id @default(cuid())
+  name        String
+  contact     String
+  service     String
+  description String
+  date        String?
+  time        String?
+  status      String  @default("PENDING") // PENDING, CONTACTED, DONE
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("consultations")
+}

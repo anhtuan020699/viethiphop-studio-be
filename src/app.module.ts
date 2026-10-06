@@ -11,6 +11,7 @@ import { PrismaModule } from './database/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { UploadModule } from './modules/upload/upload.module';
+import { ContentModule } from './modules/content/content.module';
 import r2Config from './config/r2.config';
 
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -45,6 +46,7 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
     UsersModule,
     AuthModule,
     UploadModule,
+    ContentModule,
   ],
 
   providers: [
