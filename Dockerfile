@@ -52,4 +52,4 @@ COPY --from=builder /app/dist ./dist
 EXPOSE 3000
 
 # Lệnh khởi chạy ứng dụng
-CMD ["node", "dist/main.js"]
+CMD ["node", "-r", "tsconfig-paths/register", "dist/src/main.js"]
