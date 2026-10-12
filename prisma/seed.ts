@@ -261,6 +261,103 @@ async function main() {
     ],
   });
   console.log('✅ Mix Tracks seeded into separate table!');
+
+  // Seed Events / News
+  await prisma.event.deleteMany({});
+  await prisma.event.createMany({
+    data: [
+      {
+        slug: 'workshop-new-artist-vhh',
+        title: 'Chuỗi Workshop Miễn Phí Dành Cho New Artist: Làm Chủ Mixing & Định Hình Màu Sắc',
+        description: 'Việt Hiphop Studio chính thức khởi động chuỗi Workshop hoàn toàn miễn phí dành riêng cho các nghệ sĩ mới, giải mã kỹ thuật Mixing & Mastering và bí quyết định hình chất riêng.',
+        content: `Bắt đầu hành trình làm nhạc chưa bao giờ là điều dễ dàng đối với các nghệ sĩ trẻ độc lập. Từ việc loay hoay trong khâu xử lý âm thanh, chưa biết làm sao để vocal hòa quyện vào beat, cho đến việc tìm kiếm phong cách âm nhạc đặc trưng mang dấu ấn của riêng mình.
+
+Thấu hiểu những trăn trở đó, Việt Hiphop Studio chính thức phát động chuỗi Workshop HOÀN TOÀN MIỄN PHÍ dành riêng cho NEW ARTIST tại TP.HCM. Đây là không gian cởi mở để các bạn gặp gỡ trực tiếp các Kỹ sư âm thanh (Sound Engineer) và Producer giàu kinh nghiệm của Studio, cùng mổ xẻ sản phẩm và nâng cấp kỹ năng làm nhạc thực chiến.
+
+Nội dung trọng tâm gồm 3 chuyên đề:
+1. HIỂU HƠN VỀ MIXING & MASTERING: Bóc tách chất lượng âm thanh các bài nhạc hit, nghe và góp ý trực tiếp trên sản phẩm demo của bạn.
+2. ĐI TÌM MÀU SẮC RIÊNG TRONG ÂM NHẠC: Phân tích Case Study nghệ sĩ, định hình Artist Identity và kỹ năng phát triển vocal.
+3. MINI JAM & LIVE SESSION: Live session tại phòng thu để thử nghiệm demo tâm đắc nhất và giao lưu cùng cộng đồng.
+
+Thời gian: 19:00 - 21:00 Thứ 5 hàng tuần
+Địa điểm: Việt Hiphop Studio — 435/284/25 Phạm Văn Đồng, TP.HCM
+Chi phí: Hoàn toàn miễn phí (giới hạn 15 slot/buổi để đảm bảo tương tác 1-on-1).`,
+        image: '/images/studio_mixing.png',
+        category: 'Sự kiện',
+        date: 'Thứ 5 hàng tuần (19:00 - 21:00)',
+        location: 'Việt Hiphop Studio — 435/284/25 Phạm Văn Đồng, TP.HCM',
+        author: 'Việt Hiphop Studio Team',
+        order: 1,
+      },
+      {
+        slug: 'workshop-beat-mixing-2026',
+        title: 'Workshop Chuyên Sâu: Kỹ Thuật Mix Beat & Xử Lý Vocal Rap Hiện Đại',
+        description: 'Buổi chia sẻ thực chiến cùng Sound Engineer tại phòng thu về cách cân bằng âm lượng 808 & Kick, kỹ thuật sử dụng Auto-tune mượt mà và mẹo làm vocal nổi bật trên beat.',
+        content: `Trong âm nhạc hiện đại, việc xử lý dải trầm (808 và Kick) đóng vai trò quyết định đến độ uy lực của một bản nhạc. Workshop sẽ hướng dẫn kỹ thuật sidechain compression, EQ dynamic và bão hòa analog (saturation) để tiếng bass tròn trịa mà không lấn át vocal.
+
+Ngoài ra, các kỹ sư âm thanh tại phòng thu sẽ trực tiếp thị phạm cách tune giọng bằng Antares Auto-Tune và Melodyne sao cho tự nhiên, mượt mà mà vẫn giữ trọn cảm xúc.
+
+Thời gian: 14:00 - 17:30 ngày 25 Tháng 10, 2026
+Địa điểm: Việt Hiphop Studio — 435/284/25 Phạm Văn Đồng, TP.HCM`,
+        image: '/images/studio_mic.png',
+        category: 'Sự kiện',
+        date: '25 Tháng 10, 2026',
+        location: 'Việt Hiphop Studio — 435/284/25 Phạm Văn Đồng, TP.HCM',
+        author: 'Sound Engineer Team',
+        order: 2,
+      },
+      {
+        slug: 'cypher-session-night',
+        title: 'Viet Hiphop Cypher Session: Đêm Thu Âm & Giao Lưu Nghệ Sĩ Trẻ Sài Gòn',
+        description: 'Sân chơi âm nhạc định kỳ kết nối các Rapper, Singer và Beatmaker tài năng tại TP.HCM. Thu âm trực tiếp cypher track và phát hành trên các kênh truyền thông của Studio.',
+        content: `Cypher Session là đêm gặp gỡ thân mật giữa các nghệ sĩ underground và mainstream. Không gian phòng thu mở cửa để các bạn thả mic, thử verse mới trên những con beat độc quyền do chính Studio sản xuất.
+
+Tất cả các phần thu âm hay nhất trong đêm sẽ được ghi hình và đăng tải trên kênh chính thức của Việt Hiphop Studio.`,
+        image: '/images/studio_space.png',
+        category: 'Sự kiện',
+        date: '08 Tháng 11, 2026',
+        location: 'Việt Hiphop Studio — 435/284/25 Phạm Văn Đồng, TP.HCM',
+        author: 'Việt Hiphop Event Team',
+        order: 3,
+      },
+      {
+        slug: 'nang-cap-thiet-bi-phong-thu-2026',
+        title: 'Việt Hiphop Studio Hoàn Tất Nâng Cấp Hệ Thống Microphone & Preamp Analog Mới',
+        description: 'Trang bị thêm Neumann U87 Ai, Preamp Neve 1073 và hệ thống tiêu âm cách âm chuẩn quốc tế phục vụ các dự án âm nhạc chuyên nghiệp.',
+        content: `Để mang lại chất lượng bản thu tốt nhất cho các nghệ sĩ, Việt Hiphop Studio vừa hoàn tất đợt nâng cấp toàn diện trang thiết bị phòng thu tháng 10/2026.
+
+Hệ thống bổ sung gồm microphone huyền thoại Neumann U87 Ai, Preamp analog Neve 1073 Dual, loa kiểm âm Genelec The Ones cùng hệ thống xử lý âm học bass trap cải tiến. Mời các nghệ sĩ ghé trải nghiệm không gian âm thanh mới!`,
+        image: '/images/studio_mixing.png',
+        category: 'Tin tức',
+        date: 'Tháng 10, 2026',
+        location: 'Việt Hiphop Studio',
+        author: 'Ban Quản Trị Studio',
+        order: 4,
+      },
+      {
+        slug: 'uu-dai-thu-am-thang-10-2026',
+        title: 'Ưu Đãi Tháng 10: Giảm 20% Dịch Vụ Thu Âm Kỷ Niệm & Nhạc Cưới',
+        description: 'Mừng mùa cưới 2026, Việt Hiphop Studio tặng ưu đãi giảm 20% cho toàn bộ gói thu âm Nhạc kỷ niệm và Nhạc cưới. Đặt lịch ngay để nhận ngay mức giá ưu đãi đặc biệt.',
+        content: `Nhân dịp mùa cưới và kỷ niệm cuối năm 2026, Việt Hiphop Studio dành tặng ưu đãi đặc biệt:
+
+🎁 GIẢM 20% tất cả gói Thu âm Nhạc kỷ niệm (tặng quà, kỷ niệm ngày đặc biệt, lời chúc bằng âm nhạc)
+🎁 GIẢM 20% tất cả gói Thu âm Nhạc cưới (song ca, lời thề, tiệc cưới)
+
+Thời gian áp dụng: 01/10/2026 – 31/10/2026
+
+Cách nhận ưu đãi: Đặt lịch qua Messenger hoặc gọi trực tiếp hotline 033 307 0996, báo mã ưu đãi ĐẶC BIỆT THÁNG 10 khi đặt lịch.
+
+Số lượng slot có hạn, ưu tiên khách đặt lịch sớm!`,
+        image: '/images/studio_mixing.png',
+        category: 'Ưu đãi',
+        date: '01/10/2026 – 31/10/2026',
+        location: 'Việt Hiphop Studio — 435/284/25 Phạm Văn Đồng, TP.HCM',
+        author: 'Việt Hiphop Studio Team',
+        order: 5,
+      },
+    ],
+  });
+  console.log('✅ Events / News seeded successfully!');
 }
 
 main()
