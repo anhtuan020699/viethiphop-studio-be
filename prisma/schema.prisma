@@ -114,6 +114,9 @@ model Beat {
   discountedPrice Int?
   status          String   @default("available") // available | sold
   youtubeUrl      String
+  genre           String?
+  subgenre        String?
+  typeBeat        String?
   isActive        Boolean  @default(true)
 
   createdAt DateTime @default(now())
@@ -121,3 +124,23 @@ model Beat {
 
   @@map("beats")
 }
+
+model MixTrack {
+  id          String   @id @default(cuid())
+  title       String
+  artist      String   @default("Việt Hiphop Artist")
+  packageType String   @default("Nâng cao") // "Cơ bản" | "Nâng cao" | "Chuyên nghiệp"
+  category    String   @default("Phát hành") // "Phát hành" | "Cover" | "TVC" | "Giọng đọc"
+  subCategory String?  // "Rap" | "RnB" | "Pop" | "Ballad" | "Nhạc cưới" | "Trữ tình" | "Tốp ca"
+  youtubeUrl  String
+  thumbUrl    String?
+  description String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("mix_tracks")
+}
+

@@ -5,8 +5,11 @@ import { PrismaService } from '../../database/prisma.service';
 export class BeatsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(activeOnly = false) {
-    const where = activeOnly ? { isActive: true } : {};
+  async findAll(activeOnly = false, genre?: string, subgenre?: string, typeBeat?: string) {
+    const where: any = activeOnly ? { isActive: true } : {};
+    if (genre && genre !== 'all') where.genre = genre;
+    if (subgenre && subgenre !== 'all') where.subgenre = subgenre;
+    if (typeBeat && typeBeat !== 'all') where.typeBeat = typeBeat;
     return this.prisma.beat.findMany({ where, orderBy: { createdAt: 'desc' } });
   }
 

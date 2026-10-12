@@ -13,6 +13,7 @@ import { UsersModule } from './modules/users/users.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { ContentModule } from './modules/content/content.module';
 import { BeatsModule } from './modules/beats/beats.module';
+import { MixTracksModule } from './modules/mix-tracks/mix-tracks.module';
 import r2Config from './config/r2.config';
 
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -49,6 +50,7 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
     UploadModule,
     ContentModule,
     BeatsModule,
+    MixTracksModule,
   ],
 
   providers: [

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete, UseGuards, Query } from '@nestjs/common';
 import { BeatsService } from './beats.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { Public } from '../../common/decorators/public.decorator';
@@ -9,14 +9,22 @@ export class BeatsController {
 
   @Public()
   @Get()
-  findAll() {
-    return this.beatsService.findAll(true); // Return active beats for public
+  findAll(
+    @Query('genre') genre?: string,
+    @Query('subgenre') subgenre?: string,
+    @Query('typeBeat') typeBeat?: string,
+  ) {
+    return this.beatsService.findAll(true, genre, subgenre, typeBeat);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('admin')
-  findAllAdmin() {
-    return this.beatsService.findAll(false);
+  findAllAdmin(
+    @Query('genre') genre?: string,
+    @Query('subgenre') subgenre?: string,
+    @Query('typeBeat') typeBeat?: string,
+  ) {
+    return this.beatsService.findAll(false, genre, subgenre, typeBeat);
   }
 
   @Public()
