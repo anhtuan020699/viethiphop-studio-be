@@ -72,6 +72,7 @@ model Faq {
   id       String  @id @default(cuid())
   question String
   answer   String
+  category String  @default("general") // "general" | "pricing"
   order    Int     @default(0)
   isActive Boolean @default(true)
 
