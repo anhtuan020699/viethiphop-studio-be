@@ -154,8 +154,6 @@ model Event {
   image       String?  // Ảnh bìa bài viết
   category    String   @default("Tin tức") // "Sự kiện" | "Tin tức" | "Workshop"
   author      String   @default("Việt Hiphop Studio")
-  date        String?  // Ngày hiển thị hoặc ngày diễn ra
-  location    String?  // Địa điểm
   order       Int      @default(0)
   isActive    Boolean  @default(true)
 

@@ -62,15 +62,21 @@ export class EventsService {
       slug = `${slug}-${Date.now().toString().slice(-4)}`;
     }
 
+    delete data.date;
+    delete data.location;
     return this.prisma.event.create({
       data: {
         ...data,
         slug,
+        author: "Việt Hiphop Studio",
       },
     });
   }
 
   async update(id: string, data: any) {
+    delete data.date;
+    delete data.location;
+    data.author = "Việt Hiphop Studio";
     if (data.slug) {
       data.slug = generateSlug(data.slug);
     }
