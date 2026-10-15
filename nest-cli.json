@@ -6,6 +6,6 @@
     "deleteOutDir": true,
     "plugins": ["@nestjs/swagger"],
     "builder": "tsc",
-    "tsConfigPath": "tsconfig.json"
+    "tsConfigPath": "tsconfig.build.json"
   }
 }

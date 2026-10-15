@@ -25,6 +25,7 @@ pnpm-debug.log*
 # Prisma
 # ===========================
 prisma/migrations/
+src/generated/
 
 # ===========================
 # Logs

@@ -163,3 +163,53 @@ model Event {
   @@map("events")
 }
 
+model AboutGalleryImage {
+  id        String   @id @default(cuid())
+  src       String
+  caption   String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("about_gallery_images")
+}
+
+model GearCategory {
+  id        String     @id @default(cuid())
+  title     String
+  icon      String     @default("Mic2")
+  order     Int        @default(0)
+  isActive  Boolean    @default(true)
+  items     GearItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("gear_categories")
+}
+
+model GearItem {
+  id         String          @id @default(cuid())
+  categoryId String
+  category   GearCategory    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name       String
+  order      Int             @default(0)
+  isActive   Boolean         @default(true)
+  images     GearItemImage[]
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  @@map("gear_items")
+}
+
+model GearItemImage {
+  id        String   @id @default(cuid())
+  itemId    String
+  item      GearItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  src       String
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@map("gear_item_images")
+}
+
