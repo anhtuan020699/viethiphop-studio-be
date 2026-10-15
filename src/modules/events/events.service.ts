@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 
 function generateSlug(title: string): string {
@@ -53,14 +53,19 @@ export class EventsService {
     return event;
   }
 
-  async create(data: any) {
-    let slug = data.slug ? generateSlug(data.slug) : generateSlug(data.title || 'tin-tuc');
-    
-    // Ensure slug uniqueness
-    let existing = await this.prisma.event.findUnique({ where: { slug } });
-    if (existing) {
-      slug = `${slug}-${Date.now().toString().slice(-4)}`;
+  private async assertSlugFree(slug: string, excludeId?: string) {
+    const existing = await this.prisma.event.findUnique({ where: { slug } });
+    if (existing && existing.id !== excludeId) {
+      throw new ConflictException('Slug đã tồn tại, hãy chọn đường dẫn khác');
     }
+  }
+
+  async create(data: any) {
+    const slug = data.slug
+      ? generateSlug(data.slug)
+      : generateSlug(data.title || 'tin-tuc');
+
+    await this.assertSlugFree(slug);
 
     delete data.date;
     delete data.location;
@@ -79,6 +84,7 @@ export class EventsService {
     data.author = "Việt Hiphop Studio";
     if (data.slug) {
       data.slug = generateSlug(data.slug);
+      await this.assertSlugFree(data.slug, id);
     }
     return this.prisma.event.update({
       where: { id },
