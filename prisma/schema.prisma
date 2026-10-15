@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -37,8 +37,8 @@ model Service {
   number      String? // e.g., '01'
   title       String
   english     String?
-  description String
-  suitableFor String?
+  description String  @db.Text
+  suitableFor String? @db.Text
   source      String?
   isMain      Boolean @default(true)
   order       Int     @default(0)
@@ -56,7 +56,7 @@ model Media {
   alt            String?
   title          String?
   category       String // "Không gian" | "Âm nhạc"
-  description    String?
+  description    String? @db.Text
   source         String?
   objectPosition String?
   order          Int     @default(0)
@@ -71,7 +71,7 @@ model Media {
 model Faq {
   id       String  @id @default(cuid())
   question String
-  answer   String
+  answer   String  @db.Text
   category String  @default("general") // "general" | "pricing"
   order    Int     @default(0)
   isActive Boolean @default(true)
@@ -85,7 +85,7 @@ model Faq {
 model Setting {
   id    String @id @default(cuid())
   key   String @unique
-  value String
+  value String @db.Text
   
   updatedAt DateTime @updatedAt
 
@@ -97,7 +97,7 @@ model Consultation {
   name        String
   contact     String
   service     String
-  description String
+  description String  @db.Text
   date        String?
   time        String?
   status      String  @default("PENDING") // PENDING, CONTACTED, DONE
@@ -135,7 +135,7 @@ model MixTrack {
   subCategory String?  // "Rap" | "RnB" | "Pop" | "Ballad" | "Nhạc cưới" | "Trữ tình" | "Tốp ca"
   youtubeUrl  String
   thumbUrl    String?
-  description String?
+  description String? @db.Text
   order       Int      @default(0)
   isActive    Boolean  @default(true)
 
@@ -149,8 +149,8 @@ model Event {
   id          String   @id @default(cuid())
   title       String
   slug        String   @unique
-  description String?  // Tóm tắt ngắn
-  content     String   // Nội dung bài viết
+  description String?  @db.Text // Tóm tắt ngắn
+  content     String   @db.Text // Nội dung bài viết
   image       String?  // Ảnh bìa bài viết
   category    String   @default("Tin tức") // "Sự kiện" | "Tin tức" | "Workshop"
   author      String   @default("Việt Hiphop Studio")
