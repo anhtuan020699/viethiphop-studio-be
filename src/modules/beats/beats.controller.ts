@@ -12,9 +12,11 @@ export class BeatsController {
   findAll(
     @Query('genre') genre?: string,
     @Query('subgenre') subgenre?: string,
+    @Query('hiphopDong') hiphopDong?: string,
     @Query('typeBeat') typeBeat?: string,
+    @Query('hiphopType') hiphopType?: string,
   ) {
-    return this.beatsService.findAll(true, genre, subgenre, typeBeat);
+    return this.beatsService.findAll(true, genre, subgenre || hiphopDong, typeBeat || hiphopType);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -22,9 +24,11 @@ export class BeatsController {
   findAllAdmin(
     @Query('genre') genre?: string,
     @Query('subgenre') subgenre?: string,
+    @Query('hiphopDong') hiphopDong?: string,
     @Query('typeBeat') typeBeat?: string,
+    @Query('hiphopType') hiphopType?: string,
   ) {
-    return this.beatsService.findAll(false, genre, subgenre, typeBeat);
+    return this.beatsService.findAll(false, genre, subgenre || hiphopDong, typeBeat || hiphopType);
   }
 
   @Public()
