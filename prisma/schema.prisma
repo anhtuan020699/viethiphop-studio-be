@@ -131,7 +131,7 @@ model MixTrack {
   title       String
   artist      String   @default("Việt Hiphop Artist")
   packageType String   @default("Nâng cao") // "Cơ bản" | "Nâng cao" | "Chuyên nghiệp"
-  category    String   @default("Phát hành") // "Phát hành" | "Cover" | "TVC" | "Giọng đọc"
+  category    String   @default("Nhạc phát hành") // "Nhạc phát hành" | "Cover" | "TVC" | "Giọng đọc"
   subCategory String?  // "Rap" | "RnB" | "Pop" | "Ballad" | "Nhạc cưới" | "Trữ tình" | "Tốp ca"
   youtubeUrl  String
   thumbUrl    String?
