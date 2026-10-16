@@ -10,4 +10,10 @@ services:
     ports:
       - "3010:3000"
     env_file:
-      - .env.production
+      - .env.staging
+    networks:
+      - apps_shared
+
+networks:
+  apps_shared:
+    external: true
