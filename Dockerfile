@@ -45,11 +45,9 @@ RUN npm ci --omit=dev
 # Generate lại Prisma Client cho production
 RUN npx prisma generate
 
-# Copy thư mục build đã được biên dịch xong từ bước Builder sang đây
 COPY --from=builder /app/dist ./dist
+COPY tsconfig.json ./
 
-# Mở cổng 3000 để giao tiếp với Nginx/Host
 EXPOSE 3000
 
-# Lệnh khởi chạy ứng dụng
-CMD ["node", "-r", "tsconfig-paths/register", "dist/src/main.js"]
+CMD ["node", "-r", "tsconfig-paths/register", "dist/main.js"]
