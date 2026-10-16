@@ -6,6 +6,8 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
+  const http = app.getHttpAdapter().getInstance() as { set?: (k: string, v: unknown) => void };
+  http.set?.('trust proxy', 1);
 
   // ─── Security ───────────────────────────────────────────────────
   app.use(
