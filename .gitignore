@@ -16,10 +16,9 @@ pnpm-debug.log*
 # ===========================
 # Environment
 # ===========================
-.env
-.env.local
-.env.*.local
+.env*
 !.env.example
+
 
 # ===========================
 # Prisma
