@@ -8,7 +8,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
 
   // ─── Security ───────────────────────────────────────────────────
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+      crossOriginEmbedderPolicy: false,
+    }),
+  );
 
   // ─── CORS ───────────────────────────────────────────────────────
   const corsOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3001').split(',');
