@@ -91,10 +91,22 @@ async function main() {
   await prisma.faq.deleteMany({});
   await prisma.faq.createMany({
     data: [
-      { question: 'Lần đầu thu âm, tôi nên bắt đầu từ đâu?', answer: 'Bạn có thể chia sẻ bài hát, bản demo hoặc đơn giản là ý tưởng đang có. Studio sẽ trao đổi cùng bạn để xác định nhu cầu và hướng làm việc phù hợp.', order: 1 },
-      { question: 'Studio có nhận các thể loại ngoài rap không?', answer: 'Fanpage Studio giới thiệu cả rap, ballad và những ca khúc dành tặng người thân. Hãy gửi bài tham khảo hoặc mô tả thể loại bạn muốn thực hiện để trao đổi cụ thể.', order: 2 },
-      { question: 'Tôi có thể xem báo giá ở đâu?', answer: 'Liên hệ Studio và cho biết dịch vụ, phạm vi dự án cùng mong muốn của bạn để được tư vấn báo giá phù hợp.', order: 3 },
-      { question: 'Làm thế nào để đặt lịch làm việc?', answer: 'Gửi nhu cầu và thời gian mong muốn qua Messenger hoặc gọi Studio. Lịch làm việc được thống nhất trực tiếp với Studio sau khi trao đổi.', order: 4 },
+      // Services FAQs
+      { category: 'services', question: 'Lần đầu thu âm, tôi nên bắt đầu từ đâu?', answer: 'Bạn có thể chia sẻ bài hát, bản demo hoặc đơn giản là ý tưởng đang có. Studio sẽ trao đổi cùng bạn để xác định nhu cầu và hướng làm việc phù hợp.', order: 1 },
+      { category: 'services', question: 'Studio có nhận các thể loại ngoài rap không?', answer: 'Fanpage Studio giới thiệu cả rap, ballad và những ca khúc dành tặng người thân. Hãy gửi bài tham khảo hoặc mô tả thể loại bạn muốn thực hiện để trao đổi cụ thể.', order: 2 },
+      { category: 'services', question: 'Tôi có thể xem báo giá ở đâu?', answer: 'Liên hệ Studio và cho biết dịch vụ, phạm vi dự án cùng mong muốn của bạn để được tư vấn báo giá phù hợp.', order: 3 },
+      { category: 'services', question: 'Làm thế nào để đặt lịch làm việc?', answer: 'Gửi nhu cầu và thời gian mong muốn qua Messenger hoặc gọi Studio. Lịch làm việc được thống nhất trực tiếp với Studio sau khi trao đổi.', order: 4 },
+
+      // Pricing FAQs
+      { category: 'pricing', question: 'Chi phí một bài thu âm hoặc trọn gói tính như thế nào?', answer: 'Studio có các gói thu âm cơ bản theo giờ và trọn gói theo bài (bao gồm thu âm, chỉnh vocal và mix master). Bạn có thể xem chi tiết bảng giá hoặc liên hệ để nhận báo giá chính xác.', order: 1 },
+      { category: 'pricing', question: 'Có phụ thu nếu phát sinh thêm thời gian thu âm không?', answer: 'Nếu thời gian thu kéo dài hơn dự kiến của gói đã đặt, Studio sẽ thông báo trước và tính chi phí phát sinh theo block 30 phút theo mức giá ưu đãi.', order: 2 },
+
+      // Mix & Master FAQs
+      { category: 'mix-master', question: 'Tôi cần chuẩn bị những gì trước khi gửi bài Mix & Master?', answer: 'Bạn cần chuẩn bị beat (file WAV hoặc MP3 chất lượng cao 320kbps), các track vocal mộc (không dính hiệu ứng reverb/delay, xuất từ cùng vạch 00:00 ở định dạng WAV 24-bit/44.1kHz hoặc 48kHz), và bản demo ghi âm mộc hướng dẫn cách đi flow/giai điệu (nếu có).', order: 1 },
+      { category: 'mix-master', question: 'Thời gian hoàn thành một sản phẩm Mix & Master là bao lâu?', answer: 'Thời gian xử lý thông thường từ 2 - 4 ngày làm việc tuỳ theo gói dịch vụ (Cơ bản, Nâng cao hay Chuyên nghiệp) và số lượng vocal tracks. Với các dự án TVC hoặc phát hành gấp, Studio có hỗ trợ gói hỏa tốc nhận bài trong 24 giờ.', order: 2 },
+      { category: 'mix-master', question: 'Tôi được yêu cầu chỉnh sửa (feedback/revision) bao nhiêu lần?', answer: 'Mỗi bản mix đều bao gồm từ 2 - 3 vòng chỉnh sửa chi tiết miễn phí dựa trên feedback của bạn (về âm lượng, reverb, autotune, dynamic EQ...). Studio sẽ đồng hành cho tới khi bạn hoàn toàn ưng ý với chất âm.', order: 3 },
+      { category: 'mix-master', question: 'File sản phẩm bàn giao cuối cùng sẽ gồm những gì?', answer: 'Studio sẽ bàn giao bản Master chính thức định dạng WAV 24-bit chất lượng cao chuẩn streaming (Spotify, Apple Music, YouTube) và MP3 320kbps. Nếu bạn có nhu cầu nhận bản Instrumental (beat đã master) hoặc TV track (beat + bè), Studio sẽ xuất kèm theo yêu cầu.', order: 4 },
+      { category: 'mix-master', question: 'Sự khác biệt giữa gói Cơ bản, Nâng cao và Chuyên nghiệp là gì?', answer: 'Gói Cơ bản tối ưu cho vocal thu sẵn, lồng tiếng, podcast hoặc bài thi cần xử lý sạch sẽ; gói Nâng cao chuyên sâu về cân chỉnh cao độ thủ công (Melodyne), tạo không gian vocal và nén động lực; gói Chuyên nghiệp áp dụng chuỗi analog modeling cao cấp, xử lý đa bè, tuning tỉ mỉ từng nốt và mastering đạt chuẩn thương mại quốc tế.', order: 5 },
     ]
   });
   console.log('✅ FAQs seeded!');
@@ -206,6 +218,7 @@ async function main() {
         artist: 'VietHiphop Production Lab',
         packageType: 'Chuyên nghiệp',
         category: 'TVC',
+        subCategory: 'TVC',
         youtubeUrl: 'https://www.youtube.com/embed/L_LUpnjgPso',
         description: 'Sound Design, Sub-drop FX, Master đanh lực tối đa cho loa điện thoại & màn LED',
         order: 5,
@@ -235,6 +248,7 @@ async function main() {
         artist: 'Host Minh Trí',
         packageType: 'Cơ bản',
         category: 'Giọng đọc',
+        subCategory: 'Podcast',
         youtubeUrl: 'https://www.youtube.com/embed/hT_nvWreIhg',
         description: 'De-esser chống chói, Noise gate lọc sạch tạp âm, chuẩn âm lượng podcast -16 LUFS',
         order: 8,
@@ -254,9 +268,30 @@ async function main() {
         artist: 'Agency & Việt Hiphop Studio',
         packageType: 'Chuyên nghiệp',
         category: 'TVC',
+        subCategory: 'TVC',
         youtubeUrl: 'https://www.youtube.com/embed/CevxZvSJLk8',
         description: 'Mixing Beat Trap sôi động kết hợp Voice-over dõng dạc, nén đa băng tần',
         order: 10,
+      },
+      {
+        title: "Lồng Tiếng Nhân Vật Anime 'Chiến Binh Rồng'",
+        artist: 'Voice Talent Studio Lab',
+        packageType: 'Nâng cao',
+        category: 'Giọng đọc',
+        subCategory: 'Lồng tiếng',
+        youtubeUrl: 'https://www.youtube.com/embed/OPf0YbXqDm0',
+        description: 'Khớp hình (Lip-sync), EQ làm dày giọng nhân vật, xử lý độ vang phòng thu',
+        order: 11,
+      },
+      {
+        title: 'Giọng Hát Mộc — Acoustic Live Session',
+        artist: 'Bảo Trâm',
+        packageType: 'Cơ bản',
+        category: 'Giọng đọc',
+        subCategory: 'Giọng hát mộc',
+        youtubeUrl: 'https://www.youtube.com/embed/uelHwf8o7_U',
+        description: 'Xử lý mộc không autotune, giữ nguyên hơi thở cảm xúc, tối ưu độ ấm vocal',
+        order: 12,
       },
     ],
   });
