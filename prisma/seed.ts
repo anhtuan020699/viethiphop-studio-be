@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { seedCustomers } from './seed-customers';
 
 const prisma = new PrismaClient();
 
@@ -457,6 +458,8 @@ Số lượng slot có hạn, ưu tiên khách đặt lịch sớm!`,
     }
     console.log('✅ Gear categories seeded!');
   }
+
+  await seedCustomers(prisma);
 }
 
 main()

@@ -16,6 +16,7 @@ import { BeatsModule } from './modules/beats/beats.module';
 import { MixTracksModule } from './modules/mix-tracks/mix-tracks.module';
 import { EventsModule } from './modules/events/events.module';
 import { AboutModule } from './modules/about/about.module';
+import { CustomersModule } from './modules/customers/customers.module';
 import r2Config from './config/r2.config';
 
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -55,6 +56,7 @@ import { JwtAuthGuard } from './common/guards/jwt-auth.guard';
     MixTracksModule,
     EventsModule,
     AboutModule,
+    CustomersModule,
   ],
 
   providers: [

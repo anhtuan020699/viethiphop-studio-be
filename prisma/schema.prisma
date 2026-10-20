@@ -213,3 +213,50 @@ model GearItemImage {
   @@map("gear_item_images")
 }
 
+model CustomerRanking {
+  id        String   @id @default(cuid())
+  year      Int      @default(2026)
+  rank      Int
+  name      String
+  note      String?  @db.Text
+  avatar    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([year, rank])
+  @@map("customer_rankings")
+}
+
+model CustomerHighlight {
+  id        String   @id @default(cuid())
+  year      Int      @default(2026)
+  month     Int
+  name      String?
+  caption   String?  @db.Text
+  image     String
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([year, month])
+  @@map("customer_highlights")
+}
+
+model CustomerClip {
+  id           String   @id @default(cuid())
+  category     String
+  title        String
+  customerName String?
+  youtubeUrl   String
+  thumbUrl     String?
+  order        Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category])
+  @@map("customer_clips")
+}
+
