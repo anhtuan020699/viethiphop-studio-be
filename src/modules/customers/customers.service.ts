@@ -19,7 +19,7 @@ export class CustomersService {
       }),
       this.prisma.customerHighlight.findMany({
         where: { year, isActive: true },
-        orderBy: [{ month: 'asc' }, { order: 'asc' }],
+        orderBy: [{ order: 'asc' }, { createdAt: 'asc' }],
       }),
       this.prisma.customerClip.findMany({
         where: { isActive: true },
@@ -38,7 +38,7 @@ export class CustomersService {
       }),
       this.prisma.customerHighlight.findMany({
         where: yearWhere,
-        orderBy: [{ year: 'desc' }, { month: 'asc' }, { order: 'asc' }],
+        orderBy: [{ year: 'desc' }, { order: 'asc' }, { createdAt: 'asc' }],
       }),
       this.prisma.customerClip.findMany({
         orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
@@ -94,6 +94,9 @@ export class CustomersService {
       year: Number(data.year) || 2026,
       rank: Number(data.rank) || 1,
       name: String(data.name || '').trim(),
+      stageName: clean(data.stageName),
+      recordingCount: Math.max(0, Number(data.recordingCount) || 0),
+      beatCount: Math.max(0, Number(data.beatCount) || 0),
       note: clean(data.note),
       avatar: clean(data.avatar),
       isActive: data.isActive !== false,
@@ -103,7 +106,7 @@ export class CustomersService {
   private highlightData(data: any) {
     return {
       year: Number(data.year) || 2026,
-      month: Math.min(12, Math.max(1, Number(data.month) || 1)),
+      month: 0,
       name: clean(data.name),
       caption: clean(data.caption),
       image: String(data.image || '').trim(),
@@ -113,7 +116,7 @@ export class CustomersService {
   }
 
   private clipData(data: any) {
-    const category = ['feedback', 'livesession', 'recording'].includes(data.category)
+    const category = ['feedback', 'livesession', 'recording', 'compare'].includes(data.category)
       ? data.category
       : 'feedback';
     return {

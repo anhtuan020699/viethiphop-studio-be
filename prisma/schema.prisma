@@ -214,15 +214,18 @@ model GearItemImage {
 }
 
 model CustomerRanking {
-  id        String   @id @default(cuid())
-  year      Int      @default(2026)
-  rank      Int
-  name      String
-  note      String?  @db.Text
-  avatar    String?
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String   @id @default(cuid())
+  year           Int      @default(2026)
+  rank           Int
+  name           String
+  stageName      String?
+  recordingCount Int      @default(0)
+  beatCount      Int      @default(0)
+  note           String?  @db.Text
+  avatar         String?
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   @@index([year, rank])
   @@map("customer_rankings")
@@ -231,7 +234,7 @@ model CustomerRanking {
 model CustomerHighlight {
   id        String   @id @default(cuid())
   year      Int      @default(2026)
-  month     Int
+  month     Int      @default(0)
   name      String?
   caption   String?  @db.Text
   image     String
@@ -240,7 +243,7 @@ model CustomerHighlight {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([year, month])
+  @@index([year, order])
   @@map("customer_highlights")
 }
 
