@@ -1,10 +1,10 @@
-
 import { Module } from '@nestjs/common';
 import { BeatsService } from './beats.service';
-import { BeatsController } from './beats.controller';
+import { BeatsPublicController } from './beats-public.controller';
+import { BeatsAdminController } from './beats-admin.controller';
 
 @Module({
-  controllers: [BeatsController],
+  controllers: [BeatsPublicController, BeatsAdminController],
   providers: [BeatsService],
 })
-export class BeatsModule { }
+export class BeatsModule {}

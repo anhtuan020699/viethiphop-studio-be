@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { MixTracksService } from './mix-tracks.service';
-import { MixTracksController } from './mix-tracks.controller';
+import { MixTracksPublicController } from './mix-tracks-public.controller';
+import { MixTracksAdminController } from './mix-tracks-admin.controller';
 
 @Module({
-  controllers: [MixTracksController],
+  controllers: [MixTracksPublicController, MixTracksAdminController],
   providers: [MixTracksService],
   exports: [MixTracksService],
 })
