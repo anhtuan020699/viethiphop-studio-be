@@ -14,7 +14,16 @@ import { Role } from '../../helpers/enums/role.enum';
 export class ContentAdminController {
   constructor(private readonly contentService: ContentService) {}
 
-  // --- SETTINGS (Admin Write) ---
+  // --- SETTINGS (Admin Read & Write) ---
+  @Get('settings')
+  @ApiOperation({
+    summary: 'Lấy cài đặt (Admin)',
+    description: 'Lấy danh sách các cài đặt chung của website'
+  })
+  getSettings() {
+    return this.contentService.getSettings();
+  }
+
   @Put('settings')
   @ApiOperation({
     summary: 'Cập nhật cài đặt',
@@ -25,6 +34,15 @@ export class ContentAdminController {
   }
 
   // --- SERVICES (Admin CRUD) ---
+  @Get('services')
+  @ApiOperation({
+    summary: 'Lấy danh sách dịch vụ (Admin)',
+    description: 'Lấy tất cả dịch vụ'
+  })
+  getServices() {
+    return this.contentService.getServices();
+  }
+
   @Post('services')
   @ApiOperation({
     summary: 'Tạo dịch vụ mới',
@@ -55,6 +73,15 @@ export class ContentAdminController {
   }
 
   // --- MEDIA (Admin CRUD) ---
+  @Get('media')
+  @ApiOperation({
+    summary: 'Lấy danh sách media (Admin)',
+    description: 'Lấy tất cả hình ảnh/media'
+  })
+  getMedia() {
+    return this.contentService.getMedia();
+  }
+
   @Post('media')
   @ApiOperation({
     summary: 'Tạo media mới',
@@ -85,6 +112,15 @@ export class ContentAdminController {
   }
 
   // --- FAQS (Admin CRUD) ---
+  @Get('faqs')
+  @ApiOperation({
+    summary: 'Lấy danh sách FAQ (Admin)',
+    description: 'Lấy tất cả FAQ kể cả những cái đang ẩn'
+  })
+  getFaqs() {
+    return this.contentService.getAllFaqs();
+  }
+
   @Post('faqs')
   @ApiOperation({
     summary: 'Tạo FAQ mới',

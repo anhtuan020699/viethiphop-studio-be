@@ -52,6 +52,9 @@ export class ContentService {
       orderBy: { order: 'asc' }
     });
   }
+  async getAllFaqs() {
+    return this.prisma.faq.findMany({ orderBy: { order: 'asc' } });
+  }
   async createFaq(data: any) {
     return this.prisma.faq.create({ data });
   }
