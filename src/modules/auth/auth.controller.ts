@@ -31,7 +31,7 @@ import {
   MSG_REGISTER_SUCCESS,
 } from '@helpers/constants/message.constant';
 
-@ApiTags('Auth')
+@ApiTags('🔐 Xác thực & Phân quyền')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -43,8 +43,8 @@ export class AuthController {
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
   @Throttle({ default: { limit: 5, ttl: 60000 } })
-  @ApiOperation({ summary: 'Register a new account' })
-  @ApiCreatedSuccessResponse(AuthResponseDto, 'Registration successful')
+  @ApiOperation({ summary: 'Đăng ký tài khoản', description: 'Tạo tài khoản mới với email và mật khẩu' })
+  @ApiCreatedSuccessResponse(AuthResponseDto, 'Đăng ký thành công')
   @ApiBadRequest('Email already exists or validation failed')
   @ApiTooManyRequests()
   async register(@Body() dto: RegisterDto) {
@@ -59,8 +59,8 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @Throttle({ default: { limit: 5, ttl: 60000 } })
-  @ApiOperation({ summary: 'Login with email & password' })
-  @ApiSuccessResponse(AuthResponseDto, 'Login successful')
+  @ApiOperation({ summary: 'Đăng nhập', description: 'Đăng nhập bằng email và mật khẩu' })
+  @ApiSuccessResponse(AuthResponseDto, 'Đăng nhập thành công')
   @ApiUnauthorized('Invalid email or password')
   @ApiTooManyRequests()
   async login(@Body() dto: LoginDto) {
@@ -75,8 +75,8 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Logout (invalidate refresh token)' })
-  @ApiSuccessResponse(AuthResponseDto, 'Logged out successfully')
+  @ApiOperation({ summary: 'Đăng xuất', description: 'Đăng xuất và hủy refresh token' })
+  @ApiSuccessResponse(AuthResponseDto, 'Đăng xuất thành công')
   @ApiAuthErrors()
   async logout(@CurrentUser('id') userId: string) {
     await this.authService.logout(userId);
@@ -91,8 +91,8 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(JwtRefreshGuard)
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Refresh access token (token rotation)' })
-  @ApiSuccessResponse(TokensResponseDto, 'New tokens issued')
+  @ApiOperation({ summary: 'Làm mới token', description: 'Cấp access token mới bằng refresh token' })
+  @ApiSuccessResponse(TokensResponseDto, 'Cấp token thành công')
   @ApiUnauthorized('Refresh token invalid or expired')
   async refresh(@CurrentUser() user: any) {
     const data = await this.authService.refreshTokens(user.sub, user.refreshToken);

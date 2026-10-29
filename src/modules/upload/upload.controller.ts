@@ -4,14 +4,14 @@ import { ApiTags, ApiConsumes, ApiBody, ApiOperation, ApiBearerAuth } from '@nes
 import { UploadService } from './upload.service';
 import 'multer';
 
-@ApiTags('upload')
+@ApiTags('📤 Tải lên File')
 @ApiBearerAuth()
 @Controller('upload')
 export class UploadController {
   constructor(private readonly uploadService: UploadService) { }
 
   @Post('image')
-  @ApiOperation({ summary: 'Upload an image' })
+  @ApiOperation({ summary: 'Tải lên hình ảnh', description: 'Tải lên file hình ảnh (JPG, PNG, GIF, WebP), tối đa 5MB' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {

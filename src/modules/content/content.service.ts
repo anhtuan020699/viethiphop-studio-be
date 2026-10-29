@@ -47,7 +47,10 @@ export class ContentService {
 
   // --- FAQS ---
   async getFaqs() {
-    return this.prisma.faq.findMany({ orderBy: { order: 'asc' } });
+    return this.prisma.faq.findMany({
+      where: { isActive: true },
+      orderBy: { order: 'asc' }
+    });
   }
   async createFaq(data: any) {
     return this.prisma.faq.create({ data });
