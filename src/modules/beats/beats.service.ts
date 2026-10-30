@@ -10,7 +10,7 @@ export class BeatsService {
     if (genre && genre !== 'all') where.genre = genre;
     if (subgenre && subgenre !== 'all') where.subgenre = subgenre;
     if (typeBeat && typeBeat !== 'all') where.typeBeat = typeBeat;
-    return this.prisma.beat.findMany({ where, orderBy: { createdAt: 'desc' } });
+    return this.prisma.beat.findMany({ where, orderBy: [{ order: 'asc' }, { createdAt: 'desc' }] });
   }
 
   async findOne(id: string) {
