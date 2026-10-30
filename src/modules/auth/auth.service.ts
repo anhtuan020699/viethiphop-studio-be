@@ -1,6 +1,5 @@
 import {
   Injectable,
-  BadRequestException,
   UnauthorizedException,
   NotFoundException,
 } from '@nestjs/common';
@@ -8,11 +7,9 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { UsersService } from '@modules/users/users.service';
 import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
 import { hashData, compareData } from '@helpers/utils/hash.util';
 import {
   MSG_INVALID_CREDENTIALS,
-  MSG_USER_ALREADY_EXISTS,
 } from '@helpers/constants/message.constant';
 import { JwtPayload } from '@common/types/jwt-payload.type';
 
@@ -23,26 +20,6 @@ export class AuthService {
     private jwtService: JwtService,
     private configService: ConfigService,
   ) {}
-
-  // ─────────────────────────────────────────────────
-  // Register
-  // ─────────────────────────────────────────────────
-  async register(dto: RegisterDto) {
-    const existing = await this.usersService.findByEmail(dto.email);
-    if (existing) throw new BadRequestException(MSG_USER_ALREADY_EXISTS);
-
-    const hashedPassword = await hashData(dto.password);
-    const user = await this.usersService.create({
-      email: dto.email,
-      password: hashedPassword,
-      name: dto.name,
-    });
-
-    const tokens = await this.generateTokens(user.id, user.email, user.role);
-    await this.updateRefreshToken(user.id, tokens.refreshToken);
-
-    return { ...tokens, user: this.sanitizeUser(user) };
-  }
 
   // ─────────────────────────────────────────────────
   // Login
